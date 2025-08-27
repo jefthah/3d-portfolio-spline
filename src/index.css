@@ -18,6 +18,10 @@ body {
   background-color: black;
   color: white;
 }
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 
 /* Hide default cursor on interactive elements */
 a,
@@ -93,3 +97,4 @@ section {
     @apply bg-background text-foreground ;
   }
 }
+

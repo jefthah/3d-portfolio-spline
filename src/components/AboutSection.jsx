@@ -1,3 +1,5 @@
+// components/AboutSection.jsx
+
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -74,7 +76,7 @@ export default function AboutSection() {
   }, []); // Added dependency array
 
   return (
-    <section
+    <section id="about"
       ref={sectionRef}
       className="h-screen relative overflow-hidden bg-gradient-to-b from-black to-[#9a74cf50]"
     >

@@ -1,9 +1,11 @@
+// components/Hero.jsx
+
 import { motion } from "framer-motion";
 import Spline from "@splinetool/react-spline";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[100svh] bg-gradient-to-b from-violet-900 to-black overflow-visible">
+    <section id="home" className="relative min-h-[100svh] bg-gradient-to-b from-violet-900 to-black overflow-visible">
       {/* ...glow & vignette tetap... */}
 
       {/* 1) LEBARKAN KANVAS */}
@@ -24,8 +26,8 @@ export default function Hero() {
               className="font-extrabold tracking-tight text-white
                      text-[clamp(2.5rem,6.5vw,6.5rem)] leading-[1.05]"
             >
-              Building Fast
-              <br /> Reliable Results
+              Full-Stack Development 
+              <br /> with Precision
             </motion.h1>
 
             <motion.p
@@ -40,8 +42,7 @@ export default function Hero() {
               className="mt-6 text-purple-200/90 text-[clamp(1rem,1.2vw+0.75rem,1.35rem)]
                      max-w-3xl mx-auto lg:mx-0"
             >
-              I deliver robust, production-ready websites and web apps with
-              speed and precision...
+              Expert in Next.js, MERN, and modern frameworks to deliver reliable digital solutions
             </motion.p>
           </div>
 
