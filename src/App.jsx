@@ -21,7 +21,7 @@ import ProgressBar from "./components/ProgressBar";
 import Experience from "./components/Experience";
 
 // Import Login components
-import LoginPage from "./components/login/auth/LoginPage";
+import LoginPage from "./components/login/auth/loginPage";
 import ProtectedRoute from "./components/login/auth/ProtectedRoute";
 
 // Import Dashboard components
