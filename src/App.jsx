@@ -22,7 +22,7 @@ import Experience from "./components/Experience";
 
 // Import Login components
 import LoginPage from "./components/login/auth/loginPage";
-import ProtectedRoute from "./components/login/auth/ProtectedRoute";
+import ProtectedRoute from "./components/login/auth/protectedRoute";
 
 // Import Dashboard components
 import Dashboard from "./components/dashboard/Dashboard";
