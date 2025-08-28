@@ -1,7 +1,7 @@
-// src/components/login/routes/LoginPage.jsx
+// src/components/login/auth/loginPage.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoginForm from '../auth/LoginForm';
+import LoginForm from '../auth/loginForm';
 import authService from '../services/authService';
 
 const LoginPage = () => {
