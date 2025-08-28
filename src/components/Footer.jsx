@@ -17,19 +17,19 @@ export default function Footer() {
             <div className="flex space-x-4">
               <a
                 className="text-gray-700 hover:text-violet-400 transition-colors"
-                href="#"
+                href="https://github.com/jefthah"
               >
                 <FiGithub className="w-5 h-5" />
               </a>
               <a
                 className="text-gray-700 hover:text-violet-400 transition-colors"
-                href="#"
+                href="https://www.instagram.com/jefta_supraja/"
               >
                 <FiInstagram className="w-5 h-5" />
               </a>
               <a
                 className="text-gray-700 hover:text-violet-400 transition-colors"
-                href="#"
+                href="https://www.linkedin.com/in/jefta-supraja-925805286/"
               >
                 <FiLinkedin className="w-5 h-5" />
               </a>

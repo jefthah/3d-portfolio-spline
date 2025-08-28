@@ -2,12 +2,38 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FiX } from "react-icons/fi";
 
 export default function ContactForm({ isOpen, onClose }) {
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add form submission logic here
-    console.log("Form submitted");
-    // You can add email service integration here
-    onClose(); // Close form after submission
+
+    const formData = new FormData(e.target);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
+
+    const API_CONTACT = import.meta.env.VITE_CONTACT_URL;
+
+    try {
+      const response = await fetch(`${API_CONTACT}api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("Message sent successfully! I'll get back to you soon.");
+        e.target.reset(); // Reset form
+        onClose(); // Close modal
+      } else {
+        alert(result.message || "Failed to send message");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to send message. Please try again.");
+    }
   };
 
   return (
@@ -35,10 +61,8 @@ export default function ContactForm({ isOpen, onClose }) {
             className="bg-gray-800 rounded-xl shadow-xl w-full max-w-md p-6"
           >
             <div className="flex justify-between items-center mb-4">
-              <h1 className="text-2xl font-bold text-gray-200">
-                Get in touch
-              </h1>
-              <button 
+              <h1 className="text-2xl font-bold text-gray-200">Get in touch</h1>
+              <button
                 onClick={onClose}
                 className="text-gray-400 hover:text-white transition-colors"
               >

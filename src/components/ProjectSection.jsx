@@ -1,10 +1,9 @@
-// components/ProjectSection.jsx
-
 import { useEffect, useState, useRef, useCallback } from "react";
 import { PinContainer } from "../components/acertenity/3d-pin";
 import "./ProjectSection.css";
 
-const API_URL = "http://localhost:3000/api/projects";
+// Menggunakan environment variable
+const API_URL = import.meta.env.VITE_API_URL || "https://backend-porto-d68o.vercel.app/api";
 
 export default function ProjectSection() {
   const [state, setState] = useState({
@@ -28,26 +27,42 @@ export default function ProjectSection() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+  // Set title langsung saat component terlihat
+  document.title = "Project | Jefta Portfolio";
+  
+  // Trigger event untuk update header state
+  window.dispatchEvent(new CustomEvent('sectionInView', { 
+    detail: { section: 'project' } 
+  }));
+}, []);
+
   // Fetch projects
   useEffect(() => {
-    fetch(API_URL)
+    fetch(`${API_URL}/projects`)
       .then(res => {
-        if (!res.ok) throw new Error("Failed to fetch");
+        if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
         return res.json();
       })
       .then(data => {
-        const projects = data.projects.map((p, i) => ({
+        // Handle different response formats
+        const projectsArray = data.data || data.projects || [];
+        
+        const projects = projectsArray.map((p, i) => ({
           id: p._id || p.id || i + 1,
           title: p.title || p.name || "Untitled",
           description: p.description || "No description",
           imageSrc: p.imageUrl || p.image || "/images/1920.png",
           deployLink: p.deployLink || "#",
-          techStack: p.techStack || ["React", "Node.js"]
+          githubRepo: p.githubRepo || "",
+          techStack: p.techStack || [],  
+          demoVideoUrl: p.demoVideoUrl || "" 
         }));
         
         setState(prev => ({ ...prev, projects, isLoading: false }));
       })
       .catch(err => {
+        console.error("Error fetching projects:", err);
         setState(prev => ({ 
           ...prev, 
           error: err.message, 
@@ -100,7 +115,7 @@ export default function ProjectSection() {
   // Loading state
   if (isLoading) {
     return (
-      <section className="w-full h-screen bg-gradient-to-b from-[#9a74cf50] to-[#1a1a1a] flex items-center justify-center">
+      <section className="w-full h-screen bg-[#9a74cf50] flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 md:w-16 md:h-16 border-4 border-purple-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <div className="text-white text-xl md:text-2xl animate-pulse">
@@ -114,7 +129,7 @@ export default function ProjectSection() {
   // Error or empty state
   if (error || !projects.length) {
     return (
-      <section className="w-full h-screen bg-gradient-to-b from-[#9a74cf50] to-[#1a1a1a] flex items-center justify-center">
+      <section className="w-full h-screen bg-[#9a74cf50]flex items-center justify-center">
         <div className="text-center text-white">
           <h2 className="text-2xl md:text-3xl mb-4">
             {error ? "Failed to load projects" : "No projects available"}
@@ -122,6 +137,14 @@ export default function ProjectSection() {
           <p className="text-gray-400">
             {error || "Please check back later"}
           </p>
+          {error && (
+            <button 
+              onClick={() => window.location.reload()} 
+              className="mt-4 px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors"
+            >
+              Retry
+            </button>
+          )}
         </div>
       </section>
     );
@@ -289,6 +312,7 @@ const ProjectCard = ({ project, isMobile }) => {
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                   onError={handleImageError}
+                  loading="lazy"
                 />
 
                 {/* Hover Overlay */}
@@ -299,6 +323,20 @@ const ProjectCard = ({ project, isMobile }) => {
                   </div>
                 </div>
               </div>
+
+              {/* GitHub Link (optional) */}
+              {project.githubRepo && (
+                <div className="mt-2 flex justify-end">
+                  <a 
+                    href={project.githubRepo} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-purple-400 hover:text-purple-300 text-xs transition-colors"
+                  >
+                    View Code →
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </PinContainer>

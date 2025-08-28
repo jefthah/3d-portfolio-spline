@@ -113,15 +113,12 @@ export default function AboutSection() {
         className="absolute lg:bottom-[-20rem] md:bottom-[-10rem] bottom-[-20rem] left-0 w-full flex md:flex-row flex-col justify-between lg:px-24 items-center opacity-0"
       >
         <h3 className="text-sm md:text-2xl font-bold text-purple-200 z-50 lg:max-w-[45rem] max-w-[27rem] tracking-wider md:mt-20 sm:mt-[-40rem] mt-[-32rem]">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique,
-          aperiam qui, quo nihil repellat nobis at ducimus delectus fugiat,
-          quibusdam doloremque deleniti saepe quis ratione iure voluptas quasi
-          nesciunt nam.
+          Jefta Supraja is a Full-Stack Developer specializing in React/Next.js and Node.js/Express. I build products end-to-end—from API and database design to fast, polished UI.
         </h3>
 
         <img
           className="lg:h-[40rem] md:h-[25rem] h-[20rem] mix-blend-lighten"
-          src="images/gradient.png"
+          src="images/bolong.png"
           alt="Gradient decoration"
         />
       </div>

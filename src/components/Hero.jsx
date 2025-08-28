@@ -5,7 +5,7 @@ import Spline from "@splinetool/react-spline";
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-[100svh] bg-gradient-to-b from-violet-900 to-black overflow-visible">
+    <section id="home" className="relative min-h-[100svh] bg-gradient-to-b from-violet-900 to-black overflow-visible overflow: hidden;">
       {/* ...glow & vignette tetap... */}
 
       {/* 1) LEBARKAN KANVAS */}

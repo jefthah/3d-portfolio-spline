@@ -113,13 +113,10 @@ export default function ContactSection() {
           className="text-center relative flex flex-col items-center justify-center opacity"
         >
           <h1 className="text-black md:w-[10rem] w-[20rem] lg:scale-[0.4] sm:scale-[0.25] scale-[0.07] md:font-bold text-sm sm:text-base leading-none mb-5">
-            Step Into the future
+            Turn Ideas into Products.
           </h1>
           <p className="text-black lg:w-[40rem] w-[20rem] absolute sm:mt-3 mt-1 md:scale-[0.1] scale-[0.068]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-            sequi omnis dolorum. Laborum debitis nostrum accusamus iure.
-            Corporis earum sunt nobis, molestiae debitis voluptatibus illo,
-            assumenda, architecto error deserunt facilis?
+            I’m Jefta, a Full-Stack Developer who combines React with a solid backend to deliver fast, dynamic web experiences.
           </p>
 
           <button
