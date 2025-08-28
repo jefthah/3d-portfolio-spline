@@ -1,7 +1,7 @@
 // components/Experience.jsx
 
 import React, { useEffect, useRef } from "react";
-import { Timeline } from "./acertenity/timeline";
+import { Timeline } from "./acertenity/Timeline";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { experienceData } from "./data/experienceData.jsx";
