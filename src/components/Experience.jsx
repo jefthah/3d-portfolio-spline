@@ -111,7 +111,7 @@ export default function Experience() {
     <section
       ref={sectionRef}
       id="experience"
-      className="relative min-h-screen bg-gradient-to-b from-[#9a74cf50] to-[black] overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-b from-black to-[#9a74cf50] overflow-hidden"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
