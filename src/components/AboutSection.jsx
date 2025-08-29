@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import { SEO } from '../components/SEO/SEOHelper'
 
 export default function AboutSection() {
   const sectionRef = useRef(null);
@@ -76,52 +77,64 @@ export default function AboutSection() {
   }, []); // Added dependency array
 
   return (
-    <section id="about"
-      ref={sectionRef}
-      className="h-screen relative overflow-hidden bg-gradient-to-b from-black to-[#9a74cf50]"
-    >
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Stars */}
-        {[...Array(10)].map((_, i) => (
-          <div
-            key={`star-${i}`}
-            ref={(el) => (starsRef.current[i] = el)}
-            className="absolute rounded-full"
-            style={{
-              width: `${10 + i * 3}px`,
-              height: `${10 + i * 3}px`,
-              backgroundColor: "white",
-              opacity: 0.2 + Math.random() * 0.4,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-      </div>
+    <>
+      {/* <SEO 
+        title="About Jefta - Full Stack Developer"
+        description="Learn about Jefta's journey as a Full Stack Developer"
+        ogTitle="About Jefta"
+        ogUrl="https://jefta-portfolio.com/#about"
+      /> */}
 
-      <div className="container mx-auto px-4 h-full flex flex-col items-center justify-center">
-        <h1
-          ref={titleRef}
-          className="text-4xl md:text-6xl font-bold sm:mb-16 text-center text-white opacity-0"
-        >
-          About Me
-        </h1>
-      </div>
-
-      <div
-        ref={introRef}
-        className="absolute lg:bottom-[-20rem] md:bottom-[-10rem] bottom-[-20rem] left-0 w-full flex md:flex-row flex-col justify-between lg:px-24 items-center opacity-0"
+      <section
+        id="about"
+        ref={sectionRef}
+        className="h-screen relative overflow-hidden bg-gradient-to-b from-black to-[#9a74cf50]"
       >
-        <h3 className="text-sm md:text-2xl font-bold text-purple-200 z-50 lg:max-w-[45rem] max-w-[27rem] tracking-wider md:mt-20 sm:mt-[-40rem] mt-[-32rem]">
-          Jefta Supraja is a Full-Stack Developer specializing in React/Next.js and Node.js/Express. I build products end-to-end—from API and database design to fast, polished UI.
-        </h3>
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Stars */}
+          {[...Array(10)].map((_, i) => (
+            <div
+              key={`star-${i}`}
+              ref={(el) => (starsRef.current[i] = el)}
+              className="absolute rounded-full"
+              style={{
+                width: `${10 + i * 3}px`,
+                height: `${10 + i * 3}px`,
+                backgroundColor: "white",
+                opacity: 0.2 + Math.random() * 0.4,
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+              }}
+            />
+          ))}
+        </div>
 
-        <img
-          className="lg:h-[40rem] md:h-[25rem] h-[20rem] mix-blend-lighten"
-          src="images/bolong.png"
-          alt="Gradient decoration"
-        />
-      </div>
-    </section>
+        <div className="container mx-auto px-4 h-full flex flex-col items-center justify-center">
+          <h1
+            ref={titleRef}
+            className="text-4xl md:text-6xl font-bold sm:mb-16 text-center text-white opacity-0"
+          >
+            About Me
+          </h1>
+        </div>
+
+        <div
+          ref={introRef}
+          className="absolute lg:bottom-[-20rem] md:bottom-[-10rem] bottom-[-20rem] left-0 w-full flex md:flex-row flex-col justify-between lg:px-24 items-center opacity-0"
+        >
+          <h3 className="text-sm md:text-2xl font-bold text-purple-200 z-50 lg:max-w-[45rem] max-w-[27rem] tracking-wider md:mt-20 sm:mt-[-40rem] mt-[-32rem]">
+            Jefta Supraja is a Full-Stack Developer specializing in
+            React/Next.js and Node.js/Express. I build products end-to-end—from
+            API and database design to fast, polished UI.
+          </h3>
+
+          <img
+            className="lg:h-[40rem] md:h-[25rem] h-[20rem] mix-blend-lighten"
+            src="images/bolong.png"
+            alt="Gradient decoration"
+          />
+        </div>
+      </section>
+    </>
   );
 }

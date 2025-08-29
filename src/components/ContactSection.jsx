@@ -3,6 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 import ContactForm from "./ContactForm";
+// import { SEO } from '../components/SEO/SEOHelper'
 
 export default function ContactSection() {
   const circleRef = useRef(null);
@@ -88,46 +89,69 @@ export default function ContactSection() {
     return cleanUp;
   }, []);
 
-  return (
-    <section
-      id="contact"
-      ref={sectionRef}
-      className="flex items-center justify-center bg-black relative min-h-screen"
-      style={{ overscrollBehavior: "none" }}
-    >
-      <div
-        ref={circleRef}
-        className="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full flex items-center justify-center relative transition-shadow duration-1000 shadow-violet-300/50 shadow-lg bg-gradient-to-r from-violet-400 to-pink-100"
-      >
-        {/* initial text */}
-        <p
-          ref={initialTextRef}
-          className="text-black font-bold text-base sm:text-lg md:text-xl absolute inset-0 flex items-center text-center"
-        >
-          SCROLL DOWN
-        </p>
+  // const contactStructuredData = {
+  //   "@context": "https://schema.org",
+  //   "@type": "ContactPage",
+  //   name: "Contact Jefta",
+  //   url: "https://jefta-portfolio.com/#contact",
+  //   mainEntity: {
+  //     "@type": "Person",
+  //     name: "Jefta",
+  //     email: "contact@jefta-portfolio.com",
+  //   },
+  // };
 
-        {/* final text */}
+  return (
+    <>
+      {/* <SEO 
+        title="Contact Jefta - Let's Work Together"
+        description="Get in touch for web development projects"
+        ogTitle="Contact Jefta"
+        ogUrl="https://jefta-portfolio.com/#contact"
+        structuredData={contactStructuredData}
+      /> */}
+
+      <section
+        id="contact"
+        ref={sectionRef}
+        className="flex items-center justify-center bg-black relative min-h-screen"
+        style={{ overscrollBehavior: "none" }}
+      >
         <div
-          ref={finalTextRef}
-          className="text-center relative flex flex-col items-center justify-center opacity"
+          ref={circleRef}
+          className="w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full flex items-center justify-center relative transition-shadow duration-1000 shadow-violet-300/50 shadow-lg bg-gradient-to-r from-violet-400 to-pink-100"
         >
-          <h1 className="text-black md:w-[10rem] w-[20rem] lg:scale-[0.4] sm:scale-[0.25] scale-[0.07] md:font-bold text-sm sm:text-base leading-none mb-5">
-            Turn Ideas into Products.
-          </h1>
-          <p className="text-black lg:w-[40rem] w-[20rem] absolute sm:mt-3 mt-1 md:scale-[0.1] scale-[0.068]">
-            I’m Jefta, a Full-Stack Developer who combines React with a solid backend to deliver fast, dynamic web experiences.
+          {/* initial text */}
+          <p
+            ref={initialTextRef}
+            className="text-black font-bold text-base sm:text-lg md:text-xl absolute inset-0 flex items-center text-center"
+          >
+            SCROLL DOWN
           </p>
 
-          <button
-            onClick={openContactForm}
-            className="px-10 py-2 rounded-xl bg-black hover:bg-white hover:text-balance transition-all duration-500 scale-[0.1] absolute sm:mt-9 mt-7 text-nowrap"
+          {/* final text */}
+          <div
+            ref={finalTextRef}
+            className="text-center relative flex flex-col items-center justify-center opacity"
           >
-            Contact Me
-          </button>
+            <h1 className="text-black md:w-[10rem] w-[20rem] lg:scale-[0.4] sm:scale-[0.25] scale-[0.07] md:font-bold text-sm sm:text-base leading-none mb-5">
+              Turn Ideas into Products.
+            </h1>
+            <p className="text-black lg:w-[40rem] w-[20rem] absolute sm:mt-3 mt-1 md:scale-[0.1] scale-[0.068]">
+              I’m Jefta, a Full-Stack Developer who combines React with a solid
+              backend to deliver fast, dynamic web experiences.
+            </p>
+
+            <button
+              onClick={openContactForm}
+              className="px-10 py-2 rounded-xl bg-black hover:bg-white hover:text-balance transition-all duration-500 scale-[0.1] absolute sm:mt-9 mt-7 text-nowrap"
+            >
+              Contact Me
+            </button>
+          </div>
         </div>
-      </div>
-      <ContactForm isOpen={contactFormOpen} onClose={closeContactForm} />
-    </section>
+        <ContactForm isOpen={contactFormOpen} onClose={closeContactForm} />
+      </section>
+    </>
   );
 }

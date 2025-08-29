@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef, useCallback } from "react";
+
 import { PinContainer } from "../components/acertenity/3d-pin";
 import "./ProjectSection.css";
+// import { SEO } from '../components/SEO/SEOHelper'
 
 // Menggunakan environment variable
 const API_URL =
@@ -12,7 +14,7 @@ export default function ProjectSection() {
     isLoading: true,
     error: null,
     currentIndex: 0,
-    isMobile: false, // Start with false, will be set in useEffect
+    isMobile: false,
   });
 
   const scrollContainerRef = useRef(null);
@@ -22,7 +24,6 @@ export default function ProjectSection() {
   // Better mobile detection
   useEffect(() => {
     const checkMobile = () => {
-      // More reliable mobile detection
       const isMobileDevice =
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
           navigator.userAgent
@@ -47,7 +48,6 @@ export default function ProjectSection() {
   }, []);
 
   useEffect(() => {
-    document.title = "Project | Jefta Portfolio";
     window.dispatchEvent(
       new CustomEvent("sectionInView", {
         detail: { section: "project" },
@@ -122,12 +122,10 @@ export default function ProjectSection() {
       );
 
       if (state.isMobile) {
-        // For mobile, scroll to specific card
         const cardWidth = container.offsetWidth;
         const scrollPosition = validIndex * cardWidth;
         container.scrollTo({ left: scrollPosition, behavior: "smooth" });
       } else {
-        // For desktop, show 2 cards at a time
         const cardWidth = container.offsetWidth / 2;
         const groupIndex = Math.floor(validIndex / 2);
         const scrollPosition = groupIndex * container.offsetWidth;
@@ -178,6 +176,32 @@ export default function ProjectSection() {
   const { projects, isLoading, error, currentIndex, isMobile } = state;
   const dotsCount = isMobile ? projects.length : Math.ceil(projects.length / 2);
 
+  // Generate structured data for SEO
+  // const structuredData = projects.length > 0 ? {
+  //   "@context": "https://schema.org",
+  //   "@type": "CollectionPage",
+  //   "name": "Jefta's Portfolio Projects",
+  //   "description": "A collection of innovative web development projects showcasing expertise in React, Node.js, and modern web technologies",
+  //   "url": "https://jefta-portfolio.com/#projects",
+  //   "creator": {
+  //     "@type": "Person",
+  //     "name": "Jefta",
+  //     "jobTitle": "Full Stack Developer"
+  //   },
+  //   "hasPart": projects.map(project => ({
+  //     "@type": "CreativeWork",
+  //     "name": project.title,
+  //     "description": project.description,
+  //     "url": project.deployLink,
+  //     "image": project.imageSrc,
+  //     "creator": {
+  //       "@type": "Person",
+  //       "name": "Jefta"
+  //     },
+  //     "keywords": project.techStack.join(", ")
+  //   }))
+  // } : null;
+
   // Loading state
   if (isLoading) {
     return (
@@ -215,172 +239,195 @@ export default function ProjectSection() {
   }
 
   return (
-    <section
-      id="project"
-      className="w-full h-screen bg-gradient-to-b from-[#9a74cf50] to-black overflow-hidden relative"
-    >
-      {/* Background effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-purple-500/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse" />
-        <div
-          className="absolute w-[350px] md:w-[500px] h-[350px] md:h-[500px] bg-purple-500/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse"
-          style={{ animationDelay: "1s" }}
-        />
-      </div>
+    <>
+      {/* <SEO 
+        title="Projects - Jefta Portfolio | Web Development Showcase"
+        description={`Explore ${projects.length} innovative web development projects built with React, Node.js, and modern technologies.`}
+        keywords="portfolio projects, web development, React projects, Node.js applications, full stack projects"
+        ogTitle="Jefta's Portfolio Projects"
+        ogDescription="Explore innovative web development projects with live demos and source code."
+        ogUrl="https://jefta-portfolio.com/#projects"
+        structuredData={structuredData}
+      /> */}
 
-      {/* Navigation buttons - Di level teratas */}
-      {!isMobile && projects.length > 2 && (
-        <>
-          <button
-            onClick={() => navigate(-1)}
-            disabled={currentIndex === 0}
-            className={`absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 w-12 h-12 lg:w-14 lg:h-14 
-            bg-purple-600 hover:bg-purple-700 text-white rounded-full 
-            shadow-2xl transition-all duration-300 flex items-center justify-center border-2 border-purple-400
-            ${
-              currentIndex === 0
-                ? "opacity-30 cursor-not-allowed"
-                : "hover:scale-110"
-            }`}
-            style={{ zIndex: 9999 }}
-          >
-            <svg
-              className="w-6 h-6 lg:w-7 lg:h-7"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-
-          <button
-            onClick={() => navigate(1)}
-            disabled={currentIndex >= projects.length - 2}
-            className={`absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 w-12 h-12 lg:w-14 lg:h-14 
-            bg-purple-600 hover:bg-purple-700 text-white rounded-full 
-            shadow-2xl transition-all duration-300 flex items-center justify-center border-2 border-purple-400
-            ${
-              currentIndex >= projects.length - 2
-                ? "opacity-30 cursor-not-allowed"
-                : "hover:scale-110"
-            }`}
-            style={{ zIndex: 9999 }}
-          >
-            <svg
-              className="w-6 h-6 lg:w-7 lg:h-7"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-        </>
-      )}
-
-      <div className="relative z-10 h-full flex flex-col">
-        {/* Header */}
-        <div className="text-center px-4 pt-6 pb-4 md:pt-8 md:pb-6">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-2">
-            Featured Projects
-          </h2>
-          <div className="w-20 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto rounded-full" />
-          <p className="text-gray-300 mt-2 text-sm md:text-base">
-            {isMobile ? "Swipe to explore" : "Explore my latest work"}
-          </p>
-        </div>
-
-        {/* Main content area */}
-        <div className="flex-1 relative overflow-hidden">
-          {/* Cards container
-          // Di dalam container cards, tambahkan spacer sebelum cards: */}
+      <section
+        id="project"
+        className="w-full h-screen bg-gradient-to-b from-[#9a74cf50] to-black overflow-hidden relative"
+        aria-label="Portfolio Projects Section"
+      >
+        {/* Background effects */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          <div className="absolute w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-purple-500/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse" />
           <div
-            ref={scrollContainerRef}
-            className={`h-full overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory scrollbar-hide 
-    ${isMobile ? "flex gap-4" : "flex"}`}
-            onScroll={handleScroll}
-            onTouchStart={isMobile ? handleTouchStart : undefined}
-            onTouchMove={isMobile ? handleTouchMove : undefined}
-            onTouchEnd={isMobile ? handleTouchEnd : undefined}
-          >
-            {/* Spacer untuk desktop */}
-            {!isMobile && <div className="w-32 flex-shrink-0" />}
+            className="absolute w-[350px] md:w-[500px] h-[350px] md:h-[500px] bg-purple-500/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse"
+            style={{ animationDelay: "1s" }}
+          />
+        </div>
 
-            {projects.map((project, index) => (
-              <div
-                key={project.id}
-                className={`${
-                  isMobile
-                    ? "min-w-full snap-center flex items-center justify-center"
-                    : "pl-60 w-[500px] flex-shrink-0 snap-start flex items-center justify-center"
-                } h-full py-6`}
+        {/* Navigation buttons */}
+        {!isMobile && projects.length > 2 && (
+          <>
+            <button
+              onClick={() => navigate(-1)}
+              disabled={currentIndex === 0}
+              className={`absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 w-12 h-12 lg:w-14 lg:h-14 
+              bg-purple-600 hover:bg-purple-700 text-white rounded-full 
+              shadow-2xl transition-all duration-300 flex items-center justify-center border-2 border-purple-400
+              ${
+                currentIndex === 0
+                  ? "opacity-30 cursor-not-allowed"
+                  : "hover:scale-110"
+              }`}
+              style={{ zIndex: 9999 }}
+              aria-label="Previous projects"
+            >
+              <svg
+                className="w-6 h-6 lg:w-7 lg:h-7"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
               >
-                <ProjectCard
-                  project={project}
-                  isMobile={isMobile}
-                  index={index}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 19l-7-7 7-7"
                 />
-              </div>
-            ))}
+              </svg>
+            </button>
+
+            <button
+              onClick={() => navigate(1)}
+              disabled={currentIndex >= projects.length - 2}
+              className={`absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 w-12 h-12 lg:w-14 lg:h-14 
+              bg-purple-600 hover:bg-purple-700 text-white rounded-full 
+              shadow-2xl transition-all duration-300 flex items-center justify-center border-2 border-purple-400
+              ${
+                currentIndex >= projects.length - 2
+                  ? "opacity-30 cursor-not-allowed"
+                  : "hover:scale-110"
+              }`}
+              style={{ zIndex: 9999 }}
+              aria-label="Next projects"
+            >
+              <svg
+                className="w-6 h-6 lg:w-7 lg:h-7"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </>
+        )}
+
+        <div className="relative z-10 h-full flex flex-col">
+          {/* Header */}
+          <header className="text-center px-4 pt-6 pb-4 md:pt-8 md:pb-6">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-2">
+              Featured Projects
+            </h2>
+            <div className="w-20 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto rounded-full" />
+            <p className="text-gray-300 mt-2 text-sm md:text-base">
+              {isMobile ? "Swipe to explore" : "Explore my latest work"}
+            </p>
+          </header>
+
+          {/* Main content area */}
+          <div className="flex-1 relative overflow-hidden">
+            {/* Cards container */}
+            <div
+              ref={scrollContainerRef}
+              className={`h-full overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory scrollbar-hide 
+      ${isMobile ? "flex gap-4" : "flex"}`}
+              onScroll={handleScroll}
+              onTouchStart={isMobile ? handleTouchStart : undefined}
+              onTouchMove={isMobile ? handleTouchMove : undefined}
+              onTouchEnd={isMobile ? handleTouchEnd : undefined}
+              role="region"
+              aria-label="Project cards carousel"
+            >
+              {/* Spacer untuk desktop */}
+              {!isMobile && <div className="w-32 flex-shrink-0" aria-hidden="true" />}
+
+              {projects.map((project, index) => (
+                <article
+                  key={project.id}
+                  className={`${
+                    isMobile
+                      ? "min-w-full snap-center flex items-center justify-center"
+                      : "pl-60 w-[500px] flex-shrink-0 snap-start flex items-center justify-center"
+                  } h-full py-6`}
+                >
+                  <ProjectCard
+                    project={project}
+                    isMobile={isMobile}
+                    index={index}
+                  />
+                </article>
+              ))}
+            </div>
           </div>
+
+          {/* Dots indicator */}
+          <nav 
+            className="flex justify-center gap-2 py-4"
+            role="navigation"
+            aria-label="Project pagination"
+          >
+            {Array.from({ length: dotsCount }).map((_, index) => {
+              const isActive = isMobile
+                ? currentIndex === index
+                : Math.floor(currentIndex / 2) === index;
+
+              return (
+                <button
+                  key={index}
+                  onClick={() => scrollToIndex(isMobile ? index : index * 2)}
+                  className={`transition-all duration-300 rounded-full ${
+                    isActive
+                      ? "w-8 h-1.5 bg-gradient-to-r from-purple-400 to-pink-400"
+                      : "w-1.5 h-1.5 bg-purple-400/40 hover:bg-purple-400/60"
+                  }`}
+                  aria-label={`Go to ${isMobile ? "project" : "project group"} ${
+                    index + 1
+                  }`}
+                  aria-current={isActive ? "true" : "false"}
+                />
+              );
+            })}
+          </nav>
         </div>
 
-        {/* Dots indicator */}
-        <div className="flex justify-center gap-2 py-4">
-          {Array.from({ length: dotsCount }).map((_, index) => {
-            const isActive = isMobile
-              ? currentIndex === index
-              : Math.floor(currentIndex / 2) === index;
-
-            return (
-              <button
-                key={index}
-                onClick={() => scrollToIndex(isMobile ? index : index * 2)}
-                className={`transition-all duration-300 rounded-full ${
-                  isActive
-                    ? "w-8 h-1.5 bg-gradient-to-r from-purple-400 to-pink-400"
-                    : "w-1.5 h-1.5 bg-purple-400/40 hover:bg-purple-400/60"
-                }`}
-                aria-label={`Go to ${isMobile ? "project" : "project group"} ${
-                  index + 1
-                }`}
-              />
-            );
-          })}
-        </div>
-      </div>
-
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .line-clamp-2 {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-      `}</style>
-    </section>
+        <style jsx>{`
+          .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+          }
+          .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+        `}</style>
+      </section>
+    </>
   );
 }
 
-// Improved Project Card Component
+// Improved Project Card Component with SEO
 const ProjectCard = ({ project, isMobile, index }) => {
   const [imageError, setImageError] = useState(false);
 
@@ -396,6 +443,8 @@ const ProjectCard = ({ project, isMobile, index }) => {
             isMobile ? "w-[75vw] max-w-[340px]" : "w-[400px] lg:w-[440px]"
           } 
           bg-gradient-to-br from-slate-900/95 to-slate-800/95 backdrop-blur-md rounded-xl shadow-2xl`}
+          itemScope
+          itemType="https://schema.org/CreativeWork"
         >
           <div className={`${isMobile ? "p-3" : "p-5 lg:p-6"}`}>
             {/* Title & Description */}
@@ -404,6 +453,7 @@ const ProjectCard = ({ project, isMobile, index }) => {
                 className={`font-bold ${
                   isMobile ? "text-base" : "text-xl lg:text-2xl"
                 } text-white mb-1 truncate`}
+                itemProp="name"
               >
                 {project.title}
               </h3>
@@ -411,6 +461,7 @@ const ProjectCard = ({ project, isMobile, index }) => {
                 className={`text-gray-300 ${
                   isMobile ? "text-xs" : "text-sm lg:text-base"
                 } line-clamp-2`}
+                itemProp="description"
               >
                 {project.description}
               </p>
@@ -422,6 +473,7 @@ const ProjectCard = ({ project, isMobile, index }) => {
                 className={`flex flex-wrap ${
                   isMobile ? "gap-1 mb-2" : "gap-2 mb-3"
                 }`}
+                itemProp="keywords"
               >
                 {project.techStack
                   .slice(0, isMobile ? 3 : 4)
@@ -462,10 +514,13 @@ const ProjectCard = ({ project, isMobile, index }) => {
               {!imageError ? (
                 <img
                   src={project.imageSrc}
-                  alt={project.title}
+                  alt={`Screenshot of ${project.title} project`}
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                   onError={() => setImageError(true)}
                   loading="lazy"
+                  width={isMobile ? "340" : "440"}
+                  height={isMobile ? "180" : "250"}
+                  itemProp="image"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
@@ -507,6 +562,8 @@ const ProjectCard = ({ project, isMobile, index }) => {
                     isMobile ? "text-[11px]" : "text-sm"
                   } 
                     transition-colors inline-flex items-center gap-1`}
+                  itemProp="url"
+                  aria-label={`View source code for ${project.title} on GitHub`}
                 >
                   View Code
                   <svg
@@ -514,6 +571,7 @@ const ProjectCard = ({ project, isMobile, index }) => {
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                   >
                     <path
                       strokeLinecap="round"
