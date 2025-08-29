@@ -235,7 +235,7 @@ export default function Header() {
             </nav>
 
             {/* Desktop Social Icons + Hire Me Button */}
-            <div className="md:flex hidden items-center gap-4">
+            <div className="hidden md:flex items-center gap-4">
               {/* Social Icons */}
               <div className="flex items-center space-x-4">
                 {SOCIAL_LINKS.map((social, index) => {
@@ -389,6 +389,16 @@ export default function Header() {
                   );
                 })}
               </div>
+
+              {/* Look at My CV Button */}
+              <a
+                href="https://docs.google.com/document/d/1SG4NuIex-Gh5T0DrIS6pU-eSr12mA8r1/edit?usp=sharing&ouid=112833147381606617908&rtpof=true&sd=true"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full px-4 py-3 mb-3 text-center rounded-lg border border-gray-400 text-gray-300 font-bold hover:border-violet-400 hover:text-violet-400 hover:bg-violet-400/10 transition-all duration-300"
+              >
+                Look at My CV
+              </a>
 
               <button
                 onClick={() => {

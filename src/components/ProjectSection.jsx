@@ -70,7 +70,7 @@ export default function ProjectSection() {
           title: p.title || p.name || "Untitled",
           description: p.description || "No description",
           imageSrc: p.imageUrl || p.image || "/images/1920.png",
-          deployLink: p.deployLink || "#",
+          deployLink: p.deployLink || "",
           githubRepo: p.githubRepo || "",
           techStack: p.techStack || [],
           demoVideoUrl: p.demoVideoUrl || "",
