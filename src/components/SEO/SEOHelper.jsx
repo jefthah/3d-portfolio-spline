@@ -12,7 +12,7 @@ export function SEO({
   ogTitle = "",
   ogDescription = "",
   ogImage = "/og-image.jpg",
-  ogUrl = "https://jefta-portfolio.com",
+  ogUrl = "https://3d-portfolio-spline.vercel.app/",
   twitterCard = "summary_large_image",
   twitterTitle = "",
   twitterDescription = "",
