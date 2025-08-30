@@ -56,6 +56,8 @@ function Portfolio() {
 
 // Main App with Routing
 export default function App() {
+
+  
   return (
     <div className="min-h-screen overflow-x-hidden bg-black">
       <Router>

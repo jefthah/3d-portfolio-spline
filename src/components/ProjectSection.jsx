@@ -47,10 +47,11 @@ export default function ProjectSection() {
     };
   }, []);
 
+  // Di ProjectSection.jsx line 44-50
   useEffect(() => {
     window.dispatchEvent(
       new CustomEvent("sectionInView", {
-        detail: { section: "project" },
+        detail: { section: "Project" }, // Ubah jadi capital P
       })
     );
   }, []);
@@ -205,7 +206,9 @@ export default function ProjectSection() {
   // Loading state
   if (isLoading) {
     return (
-      <section className="w-full h-screen bg-gradient-to-b from-[#9a74cf50] to-black flex items-center justify-center">
+      <section 
+      id="project"
+      className="w-full h-screen bg-gradient-to-b from-[#9a74cf50] to-black flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 md:w-16 md:h-16 border-4 border-purple-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <div className="text-white text-xl md:text-2xl animate-pulse">
@@ -256,7 +259,10 @@ export default function ProjectSection() {
         aria-label="Portfolio Projects Section"
       >
         {/* Background effects */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute inset-0 overflow-hidden pointer-events-none"
+          aria-hidden="true"
+        >
           <div className="absolute w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-purple-500/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse" />
           <div
             className="absolute w-[350px] md:w-[500px] h-[350px] md:h-[500px] bg-purple-500/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse"
@@ -356,7 +362,9 @@ export default function ProjectSection() {
               aria-label="Project cards carousel"
             >
               {/* Spacer untuk desktop */}
-              {!isMobile && <div className="w-32 flex-shrink-0" aria-hidden="true" />}
+              {!isMobile && (
+                <div className="w-32 flex-shrink-0" aria-hidden="true" />
+              )}
 
               {projects.map((project, index) => (
                 <article
@@ -378,7 +386,7 @@ export default function ProjectSection() {
           </div>
 
           {/* Dots indicator */}
-          <nav 
+          <nav
             className="flex justify-center gap-2 py-4"
             role="navigation"
             aria-label="Project pagination"
@@ -397,9 +405,9 @@ export default function ProjectSection() {
                       ? "w-8 h-1.5 bg-gradient-to-r from-purple-400 to-pink-400"
                       : "w-1.5 h-1.5 bg-purple-400/40 hover:bg-purple-400/60"
                   }`}
-                  aria-label={`Go to ${isMobile ? "project" : "project group"} ${
-                    index + 1
-                  }`}
+                  aria-label={`Go to ${
+                    isMobile ? "project" : "project group"
+                  } ${index + 1}`}
                   aria-current={isActive ? "true" : "false"}
                 />
               );

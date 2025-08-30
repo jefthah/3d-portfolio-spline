@@ -150,10 +150,13 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
+  // Ganti line 146-151
   useEffect(() => {
     const handleSectionInView = (event) => {
       const section = event.detail.section;
-      const formattedName = section.charAt(0).toUpperCase() + section.slice(1);
+      // Pastikan konsisten dengan kapitalisasi
+      const formattedName =
+        section.charAt(0).toUpperCase() + section.slice(1).toLowerCase();
       setActiveSection(formattedName);
     };
 
@@ -161,6 +164,16 @@ export default function Header() {
     return () =>
       window.removeEventListener("sectionInView", handleSectionInView);
   }, []);
+
+  // Line 156 - Update format title sesuai keinginan
+  useEffect(() => {
+    // Format: "Section | Jefta Portfolio"
+    if (activeSection.toLowerCase() === "home") {
+      document.title = "Jefta Supraja - Full Stack Dev";
+    } else {
+      document.title = `${activeSection} | Jefta Portfolio`;
+    }
+  }, [activeSection]);
 
   // Update page title based on active section
   useEffect(() => {
