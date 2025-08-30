@@ -6,7 +6,7 @@ Disallow: /login
 Disallow: /api/
 
 # Sitemap location
-Sitemap: https://jefta-portfolio.com/sitemap.xml
+Sitemap: https://3d-portfolio-spline.vercel.app/sitemap.xml
 
 # Crawl-delay (optional, in seconds)
 Crawl-delay: 1
